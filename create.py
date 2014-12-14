@@ -1,89 +1,51 @@
-LAUNCHPAD_URL = 'https://launchpad.net/eoec/'
-
-def usage():
-	print '''Create new EuroOffice Extension Creator project.
-
-        create.py [options] project-name
-
-Options are:
-    -h, --help                 this help
-        --vendor=VENDOR        vendor name (needed)
-    -p, --prefix=PREFIX        prefix for service names (defaults to "org.openoffice")
-    -u, --url=URL              extension website (defaults to "http://extensions.services.openoffice.org/")
-    
-To learn more or get in touch, visit the Launchpad page of EuroOffice Extension Creator at
-	%s
-'''%LAUNCHPAD_URL
-
+LOEC_URL = 'https://github.com/KAMI911/loec'
 
 def main():
+	import argparse
 	import sys
-	import getopt
-	try:
-		optlist, args = getopt.getopt( sys.argv[1:], 'hp:u:', ['help', 'vendor=', 'prefix=', 'url='] )
-	except getopt.GetoptError:
-		usage()
-		sys.exit( 2 )
-	vendor = None
-	prefix = 'org.openoffice'
-	url = 'http://extensions.services.openoffice.org/'
-	for o, a in optlist:
-		if o in ('-h', '--help'):
-			usage()
-			sys.exit()
-		elif o == '--vendor':
-			vendor = a
-		elif o in ('-p', '--prefix'):
-			prefix = a
-		elif o in ('-u', '--url'):
-			url = a
-	if len( args ) != 1:
-		usage()
-		sys.exit( 2 )
-	if vendor is None:
-		print 'Please set a vendor name using --vendor='
-		sys.exit( 2 )
-	project = args[0]
+	parser = argparse.ArgumentParser(description='Create new LibreOffice Extension Creator project.', epilog='To learn more or get in touch, visit the Launchpad page of LibreOffice Extension Creator at ' + LOEC_URL)
+	parser.add_argument('--vendor', '-v', type=str, nargs=1, required=True, help='vendor name')
+	parser.add_argument('--prefix', '-p', type=str, nargs=1, default='org.libreoffice', required=False, help='prefix for service names')
+	parser.add_argument('--url', '-u', type=str, nargs=1, default='http://extensions.libreoffice.org/', required=False, help='extension website')
+	parser.add_argument('project', type=str, metavar='project-name', help='project name')
+
+	args = parser.parse_args()
+	vendor = args.vendor[0]
+	prefix = args.prefix
+	url = args.url
+	project = args.project
+	DirCounter=0
+	FileCounter=0
 	import os
 	cwd = os.getcwd()
 	outdir = os.path.join( cwd, project )
 	if os.path.exists( outdir ):
-		print '%s already exists!'%outdir
+		print ('%s already exists!' % outdir)
 		sys.exit( 2 )
 	os.mkdir( outdir )
-	home = os.path.split( sys.argv[0] )[0]
+	home, file = os.path.split(os.path.realpath(__file__))
 	template = os.path.join( home, 'template' )
-
-	def substitute( text ):
-		text = text.replace( '%Extension Name%', project )
-		text = text.replace( '%Vendor Name%', vendor )
-		for separator in ('', '-', '_'):
-			id = project
-			for sep in (' ', '-', '_', '.', ','):
-				id = id.replace( sep, separator )
-			text = text.replace( '%Extension' + separator + 'Name%', id )
-			text = text.replace( '%extension' + separator + 'name%', id.lower() )
-			id = vendor
-			for sep in (' ', '-', '_', '.', ','):
-				id = id.replace( sep, separator )
-			text = text.replace( '%Vendor' + separator + 'Name%', id )
-			text = text.replace( '%vendor' + separator + 'name%', id.lower() )
-		text = text.replace( '%prefix%', prefix )
-		text = text.replace( '%url%', url )
-		text = text.replace( '%Creator Name%', 'EuroOffice Extension Creator (by MultiRacio Ltd.)' )
-		text = text.replace( '%Creator Short Name%', 'EuroOffice Extension Creator' )
-		text = text.replace( '%creator url%', LAUNCHPAD_URL )
-		return text
-
+	import LOECUtil
+	replicator = LOECUtil.LOECUtil(project, vendor, prefix, url, LOEC_URL)
 	for root, dirs, files in os.walk( template ):
 		for d in dirs:
-			d_out = os.path.join( substitute( root ).replace( template, outdir ), substitute( d ) )
+			d_out = os.path.join( replicator.substitute( root ).replace( template, outdir ), replicator.substitute( d ) )
 			os.mkdir( d_out )
+			DirCounter = DirCounter + 1
 		for f in files:
 			f_in = os.path.join( root, f )
-			f_out = os.path.join( substitute( root ).replace( template, outdir ), substitute( f ) )
-			contents = file( f_in, 'rb' ).read()
-			file( f_out, 'wb' ).write( substitute( contents ) )	
+			f_out = os.path.join( replicator.substitute( root ).replace( template, outdir ), replicator.substitute( f ) )
+			filename, filetype = os.path.splitext(f_in)
+			if filetype in ['.xml', '.config', '.xcs', '.xcu', '.py', '.txt', '.xdl', '.xlb', '.properties', '.tree', '.xhp']:
+				file_in=open(f_in, 'r')
+				file_out=open(f_out, 'w')
+				contents = file_in.read()
+				file_out.write( replicator.substitute( contents ) )
+			else:
+				import shutil
+				shutil.copyfile(f_in,f_out)
+			FileCounter = FileCounter + 1
+	print ('Project "%s" has successfully created with %s directories and %s files.' % (project, DirCounter, FileCounter))
 
 if __name__ == '__main__':
 	main()

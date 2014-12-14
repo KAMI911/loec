@@ -44,7 +44,7 @@ class WebCache( object ):
 def loadpage( url ):
 	import urllib2
 	opener = urllib2.build_opener()
-	opener.addheaders = [('User-agent', 'Mozilla/5.0 (OpenOffice.org extension "%Extension Name%" created with EuroOffice Extension Creator)')]
+	opener.addheaders = [('User-agent', 'Mozilla/5.0 (LibreOffice.org extension "%Extension Name%" created with LibreOffice Extension Creator)')]
 	html = opener.open( url ).read()
 	return html
 
