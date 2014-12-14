@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helpdocument version="1.0">
+<meta>
+<topic id="lookup" indexer="include" status="PUBLISH">
+<title id="title">Lookup</title>
+<filename>/org.openoffice.eoec.lookup/page1.xhp</filename>
+</topic>
+</meta>
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm1">
+<bookmark_value>Lookup</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/org.openoffice.eoec.lookup:About" id="bm2" localize="false" />
+
+<paragraph role="heading" level="1">Lookup
+</paragraph>
+<paragraph role="paragraph">
+
+Lookup is an <item type="productname">%PRODUCTNAME</item> extension by EOEC.
+
+</paragraph>
+
+
+</body>
+</helpdocument>

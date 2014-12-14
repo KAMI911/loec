@@ -1,0 +1,198 @@
+
+
+.. _the-files:
+
+The files in a new project
+==========================
+
+``create.py`` creates a number of files for your project.
+This section describes them in detail.
+
+Since some of the directory names depend on your vendor and extension names, we will
+assume that the vendor name is ``My Name`` and the extension name is ``My Extension``.
+
+.. describe:: myextension
+
+	This is the most important directory for the development, because it contains the source
+	code of the extension. The files here are:
+
+	.. describe:: myextension.py
+
+		This is the most important file for the developer, because it contains the
+		customized source code of the extension. For simple extensions you will only have
+		to edit this file. Also note that only this file is used for run-time development,
+		so while you can have external code in other ``.py`` files in this directory,
+		they will not be reloaded on changes.
+
+	.. describe:: extensioncore.py
+
+		This file includes all the core technology for your extension, most importantly
+		its base class ``ComponentBase``, the ``init`` function that takes care of
+		registering the derived class with OpenOffice.org and the debugging framework.
+	
+		See :ref:`the-extension-core`.
+
+	.. describe:: __init__.py
+
+		This file is just here for technical reasons.
+
+	.. describe:: generatedsettings.py
+
+		This file is created by the ``pack.py`` script. It tells the extension whether it
+		is in development or release mode, and in development mode also contains the path
+		to the development source tree.
+	
+		It is recommended not to put this file under version control.
+
+	.. describe:: util
+	
+		This directory includes an optional, but hopefully useful library of utility
+		modules. See :ref:`the-utility-library`.
+	
+		The Utility Library is quite small at the moment, but once it expands, you may
+		wish to remove it or trim it to only include the parts needed by your extension.
+		This is possible, because the ``extensioncore`` module does not depend on it.
+
+.. describe:: binaries-darwin-python23, binaries-linux-python23, binaries-windows-python23
+
+	These directories are included in the module search path when the OpenOffice.org
+	installation uses Python 2.3. Python 2.3 does not include ``ctypes``, so that is contained
+	in this directory. You can also add here any other binary modules that your extension
+	needs.
+
+	Similar directories can also be created for Python 2.5. It makes sense when you
+	want to include a module like PIL with your extension or if you have created your own
+	Python extension (though using ``ctypes`` is often a simpler option).
+
+.. describe:: modules-python23
+
+	This directory contains platform independent Python modules that depend on the version
+	of Python. By default the ``compiler`` and ``ctypes`` modules are placed here,
+	because they are not included in the Python 2.3 in OpenOffice.org.
+	
+	If a similar directory is created for Python 2.5 it will be appropriately handled.
+
+.. describe:: myextension-loader.py
+
+	This is the file that is actually registered with OpenOffice.org. The code inside is
+	responsible for setting up the appropriate module paths and setting up the connection
+	between OpenOffice.org and the actual extension class in ``myextension.py``.
+
+	Normally extension developers do not need to deal with this file, but there may be
+	some special cases. If something goes wrong during the installation of the extension,
+	the ``DEBUG`` option may be turned on in this file to learn more about the error.
+	If additional Python versions (besides 2.3 and 2.5) are to be supported, this file
+	also needs to be modified.
+
+.. describe:: MyExtension.xcs
+
+	This file defines the configuration options used by the extension. It already contains
+	two options, ``Origin`` which is used to find out the path of the extension and
+	``FirstRun`` which is used to execute installation code only once. More options can
+	be easily added.
+	
+.. describe:: MyExtension.xcu
+
+	Similar to ``MyExtension.xcs`` this file contains the initial values for the configuration
+	options. When adding new options make sure it is added in both files.
+	
+.. describe:: Addons.xcu
+
+	This file contains the icon associations for the new menu items in a rather verbose XML format.
+	An icon (``menuicon_small.png`` + ``menuicon_large.png``) is associated with the
+	:menuselection:`About` menu item and new associations can be created based on it.
+	
+.. describe:: Jobs.xcu
+
+	This file is used to register the extension to run at startup. If there is no need for this,
+	it may make sense to skip it altogether, so that the extension does not impact the application
+	start up speed. Removing the entry for ``Jobs.xcu`` in the ``manifest.xml`` is the simplest way
+	of doing that.
+
+.. describe:: description.xml
+
+	Contains important information about the extension and is recommended to be customized.
+	It is filled with default values and placeholders, so customization is more or less
+	straightforward, but a detailed documentation of the elements used can be found
+	`in the OpenOffice.org wiki
+	<http://wiki.services.openoffice.org/wiki/Documentation/DevGuide/Extensions/Description_of_XML_Elements>`_.
+	
+.. describe:: MyNameMyExtensionDialogs
+
+	This directory contains the dialog library of the extension.
+	
+	.. describe:: About.xdl
+	
+		The :guilabel:`About` dialog.
+		
+	.. describe:: dialog.xlb
+	
+		The XML file describing the dialog library.
+		
+	.. describe:: DialogStrings_en_US.default
+	
+		This file marks English as the default language of the dialog library.
+	
+	.. _localization-file:	
+	
+	.. describe:: DialogStrings_en_US.properties
+	
+		The localization file for the English language.
+		It is a Java property resource bundle file, so tools like `The Translate Toolkit
+		<http://translate.sourceforge.net/wiki/toolkit/index>`_ can be used to handle it.
+		(It can also be edited manually, but this is error prone.)
+
+		This file contains the whole of the localization for the extension --
+		not just the part concerning the dialogs. The :meth:`~extensioncore.ComponentBase.localize`
+		method also works with this file.
+	
+	.. describe:: ExtensionCreator.xdl
+	
+		The :guilabel:`EuroOffice Extension Creator` dialog.
+
+.. describe:: META-INF
+
+	.. describe:: manifest.xml
+	
+		When an extension is installed, every file in the archive is copied to the extension
+		directory. In addition ``manifest.xml`` tells OpenOffice.org which of these files
+		need special attention.
+		
+		Unless new ``.xcu`` configuration files are used (such as when
+		a new toolbar is defined) or new UNO types are registered, this file probably does
+		not need to be modified. New Python modules, images, dialogs, help pages, etc. do not
+		need to be added here.
+		
+.. describe:: help
+
+	This directory contains the help pages for the extension.
+
+.. describe:: resources
+
+	The license files are placed here.
+
+.. describe:: eoec.config
+
+	This Python source file is used as a configuration file that stores the information that was used to
+	create the extension with ``create.py`` (such as the URL of the extension website and the
+	name of the extension vendor). It is used by ``update.py``.
+	
+	To prevent a file from ever getting updated a ``dontupdate`` variable can be added to ``eoec.config``.
+	This variable should be a list of file names to skip during an update. (File names without paths should
+	be listed. The Barcode example demonstrates this feature.)
+	
+A number of default image files are included. Replacing them is an easy way of customizing an extension.
+
+.. describe:: extensionicon.png
+
+	The icon displayed in the :guilabel:`Extension Manager` dialog.
+
+.. describe:: logo_en.gif
+
+	The image displayed in the :guilabel:`About` dialog for the English localization.
+	Similar image files can be added for every supported language.
+	
+.. describe:: menuicon_large.png, menuicon_small.png
+
+	A pair of menu icons registered in ``Addons.xcu`` for the :menuselection:`About` menu item.
+

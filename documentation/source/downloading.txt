@@ -1,0 +1,27 @@
+
+Downloading and installing
+==========================
+
+EuroOffice Extension Creator development is managed through Launchpad at
+https://launchpad.net/eoec/. Stable releases are available at
+https://launchpad.net/eoec/+download and the live source code can be
+checked out from the `Bazaar <http://bazaar-vcs.org/>`_ repository 
+``lp:eoec``.
+
+Using Bazaar is surprisingly simple.
+Installation instructions and downloads for every platform
+are at http://doc.bazaar-vcs.org/latest/en/mini-tutorial/index.html#installation.
+Once it is installed, just execute ::
+
+	bzr branch lp:eoec
+
+and the latest source code will be downloaded. Now you can edit this source code
+and make commits, but take note that these commits are only made to your local
+repository. When you have created something magnificent, you can upload it to
+Launchpad, and the EuroOffice Extension Creator maintainers can then take a look
+and accept the changes. This process is slightly more complicated than checking
+out, but it is well described at https://help.launchpad.net/Code/UploadingABranch.
+
+Now that the source code is on your computer you can start using EuroOffice
+Extension Creator, so on to the next section!
+

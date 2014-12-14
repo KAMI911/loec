@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view>
+  <help_section application="%vendorname%" id="%vendorname%" title="%Vendor Name%'s Extensions">
+    <node id="%extensionname%" title="%Extension Name%">
+      <topic id="%vendorname%/%prefix%.%extensionname%/page1.xhp">How to use %Extension Name%</topic>
+    </node>
+  </help_section>
+</tree_view>

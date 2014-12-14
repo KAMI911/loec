@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="NewStar" dlg:left="213" dlg:top="79" dlg:width="119" dlg:height="94" dlg:help-text="&amp;643.NewStar.HelpText" dlg:closeable="true" dlg:moveable="true" dlg:title="&amp;644.NewStar.Title" dlg:help-url="org.openoffice.starmaker:About">
+ <dlg:bulletinboard>
+  <dlg:button dlg:id="CreateButton" dlg:tab-index="0" dlg:left="10" dlg:top="65" dlg:width="45" dlg:height="20" dlg:help-text="&amp;647.NewStar.CreateButton.HelpText" dlg:default="true" dlg:value="&amp;648.NewStar.CreateButton.Label" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="1" dlg:left="65" dlg:top="65" dlg:width="45" dlg:height="20" dlg:help-text="&amp;651.NewStar.CancelButton.HelpText" dlg:value="&amp;652.NewStar.CancelButton.Label" dlg:button-type="cancel"/>
+  <dlg:text dlg:id="Label2" dlg:tab-index="5" dlg:left="10" dlg:top="39" dlg:width="65" dlg:height="16" dlg:help-text="&amp;657.NewStar.Label2.HelpText" dlg:value="&amp;658.NewStar.Label2.Label"/>
+  <dlg:text dlg:id="Label1" dlg:tab-index="4" dlg:left="10" dlg:top="12" dlg:width="65" dlg:height="16" dlg:help-text="&amp;661.NewStar.Label1.HelpText" dlg:value="&amp;662.NewStar.Label1.Label"/>
+  <dlg:numericfield dlg:id="PointsField" dlg:tab-index="2" dlg:left="79" dlg:top="12" dlg:width="30" dlg:height="16" dlg:help-text="&amp;663.NewStar.PointsField.HelpText" dlg:decimal-accuracy="0" dlg:value="5" dlg:value-min="0" dlg:value-max="100" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="RatioField" dlg:tab-index="3" dlg:left="79" dlg:top="39" dlg:width="30" dlg:height="16" dlg:help-text="&amp;665.NewStar.RatioField.HelpText" dlg:decimal-accuracy="1" dlg:value="0.5" dlg:value-min="0" dlg:value-max="1" dlg:spin="true"/>
+ </dlg:bulletinboard>
+</dlg:window>

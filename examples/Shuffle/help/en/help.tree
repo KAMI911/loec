@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view>
+  <help_section application="eoec" id="eoec" title="EOEC's Extensions">
+    <node id="shuffle" title="Shuffle">
+      <topic id="eoec/org.openoffice.eoec.shuffle/page1.xhp">How to use Shuffle</topic>
+    </node>
+  </help_section>
+</tree_view>

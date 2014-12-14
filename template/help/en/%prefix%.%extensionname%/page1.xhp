@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helpdocument version="1.0">
+<meta>
+<topic id="%extensionname%" indexer="include" status="PUBLISH">
+<title id="title">%Extension Name%</title>
+<filename>/%prefix%.%extensionname%/page1.xhp</filename>
+</topic>
+</meta>
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm1">
+<bookmark_value>%Extension Name%</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/%prefix%.%extensionname%:About" id="bm2" localize="false" />
+
+<paragraph role="heading" level="1">%Extension Name%
+</paragraph>
+<paragraph role="paragraph">
+
+%Extension Name% is an <item type="productname">%PRODUCTNAME</item> extension by %Vendor Name%.
+
+</paragraph>
+
+
+</body>
+</helpdocument>

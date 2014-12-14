@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.dialog-library"
+		manifest:full-path="EOECSharpenDialogs/"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-schema"
+		manifest:full-path="Sharpen.xcs"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data"
+		manifest:full-path="Sharpen.xcu"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data"
+		manifest:full-path="Jobs.xcu"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data"
+		manifest:full-path="Addons.xcu"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.help"
+		manifest:full-path="help"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.package-bundle-description"
+		manifest:full-path="description.txt"/>
+	<manifest:file-entry manifest:media-type="application/vnd.sun.star.uno-component;type=Python"
+		manifest:full-path="sharpen-loader.py"/>
+</manifest:manifest>

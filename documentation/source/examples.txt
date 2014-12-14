@@ -1,0 +1,60 @@
+
+.. _example-extensions:
+
+Example extensions
+==================================
+
+Star Maker
+----------
+
+Star Maker is a basic OpenOffice.org Draw extension that draws a star based on input from a dialog.
+
+This is a good starter example and it is thoroughly documented in :ref:`star-maker-detailed`.
+There is also a `screencast <http://www.multiracio.com/eurooffice/news/eurooffice-extension-creator-screencast>`_
+that uses this example to demonstrate EOEC development.
+
+Barcode
+-------
+
+This example is basically the same as Star Maker, but instead of stars it draws barcodes. Since
+there is a much larger demand for barcodes, this extension has become practically useful and
+with the help of many users it has been translated to numerous languages and many barcode types
+have been added.
+
+It is now a good example of a full-fledged extension created with EOEC.
+
+Merriam-Webster Dictionary
+--------------------------
+
+*Merriam-Webster is a trademark of Merriam-Webster Incorporated.
+This example is just for developers and should not be released separately.*
+
+Merriam-Webster Dictionary is an OpenOffice.org Writer extension that integrates an
+`online thesaurus <http://www.merriam-webster.com/>`_. It is an example of an interactive dialog
+where words are looked up based on selection from a listbox and online connectivity. Python
+extensions in OpenOffice.org have the full power of Python available to them, so web pages
+can be fetched and processed with ease. For processing web pages this example uses `Beautiful
+Soup <http://www.crummy.com/software/BeautifulSoup/>`_, a very convenient and reliable pure-Python
+HTML parser.
+
+Lookup
+------
+
+Lookup is a very simple extension that looks up the selected text (in OpenOffice.org Writer) on
+Google in the user's default browser. To make it a bit more interesting it illustrates how
+a keyboard shortcut can be assigned to a menu item.
+
+Shuffle
+-------
+
+Shuffle is an OpenOffice.org Calc example and illustrates basic cell access. It shuffles the
+rows of the current selection.
+
+Sharpen
+-------
+
+Sharpen is an OpenOffice.org Draw extension. It illustrates context-menu integration,
+the integration of a binary module (`PIL <http://www.pythonware.com/products/pil/>`_) in
+a multiplatform way and access to Draw objects. It uses :func:`util.draw.embed` to
+insert the sharpened image back to OpenOffice.org.
+

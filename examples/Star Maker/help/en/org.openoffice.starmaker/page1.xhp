@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helpdocument version="1.0">
+<meta>
+<topic id="starmaker" indexer="include" status="PUBLISH">
+<title id="title">Star Maker</title>
+<filename>/org.openoffice.starmaker/page1.xhp</filename>
+</topic>
+</meta>
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm1">
+<bookmark_value>Star Maker</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/org.openoffice.starmaker:About" id="bm2" localize="false" />
+
+<paragraph role="heading" level="1">Star Maker
+</paragraph>
+<paragraph role="paragraph">
+
+Star Maker is an <item type="productname">%PRODUCTNAME</item> extension by Daniel Darabos.
+
+</paragraph>
+
+
+</body>
+</helpdocument>

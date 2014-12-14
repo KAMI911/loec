@@ -1,0 +1,350 @@
+
+.. _using-eoec:
+
+Using EuroOffice Extension Creator
+==================================
+
+Creating a new extension
+------------------------
+
+Use ``create.py`` to create your new OpenOffice.org extension.
+A command line such as the following can be used::
+
+	python create.py --vendor="My Name" "My Extension"
+
+This will create a new directory named ``My Extension`` in
+the current directory, and fill it with the files necessary
+for a basic extension.
+This directory is now your development tree.
+
+.. note::
+
+   OpenOffice.org does not take well to special characters
+   in file names. Since the vendor name and extension name
+   are both used as parts of directory names avoiding the
+   use of special characters in either is recommended.
+
+The created extension contains a number of default choices.
+For an explanation of the generated files see :ref:`the-files`.
+While the recommended and most comfortable way of development
+is by customizing the code while OpenOffice.org is running,
+there are still a number of settings that can not be changed while
+the extension is loaded, and some that can only be changed prior
+to installation.
+
+``create.py`` also has a ``--prefix=`` option that allows
+you to set a custom prefix for your internal names, such as
+``com.sun.star`` for Sun. It is recommended to set it to
+something like ``com.mycompany`` or ``org.myorganization`` to
+avoid name clashes in some instances. It defaults to
+``org.openoffice``.
+
+Packing a development version OXT
+---------------------------------
+
+When you are happy with the basic set up of the extension,
+you can create a development version OXT. The command line
+for this is::
+
+	python pack.py -D "My Extension"
+
+(Execute this command in the parent directory of the extension,
+the same place where ``create.py`` was used.)
+
+This will create a file named ``My_Extension_Debug.oxt``.
+This is a valid OpenOffice.org extension now, and once it is
+installed, the development process can begin.
+
+Note that this extension is now specific to your computer
+in that it includes the path to your development tree and will
+load its source code from there. This way you can perform all
+the development within this tree, and there is no need to copy
+files from one place to another. However it can not be shared
+with other developers.
+
+To install an extension in OpenOffice.org open the :guilabel:`Extension
+Manager` dialog (from the :menuselection:`Tools` menu), press the
+:guilabel:`Add` button and pick the newly created OXT file.
+(To make installation simpler ``pack.py`` has a ``-d`` option
+using which the location of the created OXT file can be set.)
+You will see that already a license was generated (GPL), and
+``description.xml`` is set up with a number of defaults (such as
+an icon).
+
+Restart OpenOffice.org after installing the extension. (Make sure
+that you also close the quickstarter. You know you have really
+restarted OpenOffice.org if the splash is displayed on startup.)
+
+.. note::
+
+	The prebuilt OXT files included in the release
+	archives are not development versions, so it is not possible
+	to try run-time development using them.
+
+Development
+-----------
+
+There are now two ways to introduce new code during run time.
+
+To run a few arbitrary lines of code open the :guilabel:`EuroOffice
+Extension Creator` dialog. It can be accessed by pressing the Debug button
+on the :guilabel:`About` dialog of the extension, which in turn can be
+accessed from the Help menu.
+There is an empty textbox in the :guilabel:`EuroOffice Extension Creator` dialog
+where you can enter Python code to quickly execute it. It can be used
+for discovering the structure of OpenOffice.org objects,
+experimentation and for one-off code execution. Note that the contents
+of the textbox are not saved. The code is executed in the local context
+of the extension object and ``self`` is defined to be the object itself.
+
+The other way is by editing the core source file of your extension,
+``myextension.py``. This file is monitored
+by EuroOffice Extension Creator for changes, and reloaded as needed.
+When the file is reloaded, even existing instances of the extension
+class are updated, so code changes will be instantly visible.
+
+.. _star-maker-detailed:
+
+An example: Star Maker
+^^^^^^^^^^^^^^^^^^^^^^
+
+In this example we want to create an extension that draws stars.
+The user can set the number of points the star has and the ratio
+between its inner and outer points (how "fat" the star is)
+through a dialog box.
+
+.. image:: starmaker.png
+
+We can start by designing the dialog box above.
+
+For building dialogs we use the dialog designer in OpenOffice.org.
+Start it from the :menuselection:`Tools --> Macros --> Organize Dialogs` menu item.
+In the :guilabel:`OpenOffice.org Basic Macro Organizer` select
+``MyNameStarMakerDialogs`` and click the :guilabel:`New` button.
+Give the name of the dialog -- we will go with ``NewStar`` in the example.
+Then press Edit and the dialog editor will open with a very blank dialog.
+
+The usage of the dialog editor is pretty self explanatory and not the topic
+of this tutorial, but a few things are useful to note:
+
+*	Make sure you give good internal names to the objects that you want to
+	access programmatically. And since often it is not known in advance which
+	objects are those it is best to give sensible names to everything.
+	
+*	The tab order is important for a good user experience, so pay attention
+	to it once the dialog looks good.
+	
+*	You can select the window itself by clicking on its border (which is 1 pixel
+	wide).
+	
+*	Double click something to open the properties box.
+	
+*	You can design dialogs made up of more than one page (for wizard style paged
+	dialogs). For this select the window and set the page property to 1. Create
+	page one. Set the page property of the window to 2. Everything on page one
+	disappears and you can create page two. Note that every object has a page
+	attribute, and they will only appear on that page. If the page attribute of an
+	object is 0, it will appear on all pages.
+	
+	Make sure you set the page of the window to 1 once you are done.
+
+*	If you create :guilabel:`OK`, :guilabel:`Cancel` and :guilabel:`Help` buttons
+	make sure you set their button type property accordingly. If you create a
+	:guilabel:`Help` button, make sure you set the help URL property of the dialog window.
+
+Click save once you are done in the dialog editor.
+
+The EOEC dialog has a button labeled :guilabel:`Copy dialogs from the installed extension to your
+development branch`.
+It is a good idea to make a habit of pressing this button once the dialog is finished, because right now
+the design for the dialog only exists in OpenOffice.org and not in your development tree. Pressing
+this button copies the dialogs to the development tree.
+
+Now we want a menu item in OpenOffice.org Draw that opens this dialog box.
+We want this menu item to be created when the user installs our extension,
+and we also want it to be created right now, so we do not have to reinstall our
+extension.
+
+Open the ``starmaker.py`` file in your code editor. Take a look at the ``firstrun`` method.
+This method is executed on the first startup after you extension was installed.
+Currently it installs the :menuselection:`About Star Maker` menu item in the help menu.
+
+The :meth:`~extensioncore.ComponentBase.addMenuItem` method has four parameters:
+
+1.	The document type for which we want to install the menu item. For Draw it is
+	``'com.sun.star.drawing.DrawingDocument'``.
+2.	The menu item after which we want to install our menu item, or if we want it
+	to be the first in a menu, then the parent menu item. Menu items are referenced
+	by their internal OpenOffice.org service names. You can find out the service
+	name of every menu item by executing ::
+	
+		self.dumpMenus( 'com.sun.star.drawing.DrawingDocument' )
+	
+	in the EOEC dialog. We want to insert the new menu item at the top of the insert
+	menu, so the service name is ``'.uno:InsertMenu'``.
+3.	The name of the new menu item as it should appear. We can simply give a string here,
+	or we could use ``self.localize()`` to get a localized label.
+4.	The internal name of the menu item, which is also the name of the method in the
+	extension class that needs to be invoked when the menu item is clicked.
+
+In the end the line to insert our new menu item is::
+
+	self.addMenuItem(
+			'com.sun.star.drawing.DrawingDocument',
+			'.uno:InsertMenu',
+			'Star Maker',
+			'starmaker' )
+
+Try it in the EOEC dialog. If everything worked a new menu item should have appeared
+in the Insert menu (only in Draw). If it worked correctly, add this line to the
+``firstrun`` method too, and to make sure we behave politely, add ::
+
+	self.removeMenuItem(
+			'com.sun.star.drawing.DrawingDocument',
+			'starmaker' )
+
+in the ``uninstall`` method so that the menu item is removed when the extension is.
+
+If you click the menu item now, nothing happens yet.
+We need to write the corresponding method, which is ``starmaker``.
+Create a new method in the class named ``starmaker`` like this::
+
+	def starmaker( self ):
+		self.box( 'Hello' )
+
+Save ``starmaker.py`` and click the menu item again. The code will be reloaded and
+a message box displayed. We can now delete the placeholder ``self.box()`` call and
+start writing our code in earnest.
+
+The first thing we want to do is display the dialog box that we meticulously designed::
+
+	dlg = self.createdialog( 'NewStar' )
+	ok = dlg.execute()
+
+The ``execute`` method displays the dialog box and waits until it is closed.
+The dialog is closed when either the :guilabel:`OK` or the :guilabel:`Cancel`
+button is pressed or by some other means (using Esc or Alt-F4 on Windows for example).
+The return value of ``execute`` can be used to tell how the dialog was closed,
+and it is ``True`` when it was closed via the :guilabel:`OK` button.
+
+If you save the source code and try the menu item now, you will see that the
+dialog you have designed pops up.
+
+So we do not want to do anything if :guilabel:`OK` was not pressed::
+
+	if not ok:
+		return
+
+Otherwise we want to get the values entered into the two numeric fields (which we
+have named ``PointsField`` and ``RatioField``)::
+
+	points = int( dlg.getControl( 'PointsField' ).Value )
+	ratio = float( dlg.getControl( 'RatioField' ).Value )
+
+You could now display these values in a message box to check if everything is working.
+
+Now let us create an array of two-dimensional coordinates that make up our star::
+
+	poly = []
+	size = 1000
+	import math
+	for i in range( points ):
+		# add an external point
+		x = size * math.sin( i * math.pi * 2 / points )
+		y = size * math.cos( i * math.pi * 2 / points )
+		poly.append( (x, y) )
+		# add an internal point
+		x = ratio * size * math.sin( (i + 0.5) * math.pi * 2 / points )
+		y = ratio * size * math.cos( (i + 0.5) * math.pi * 2 / points )
+		poly.append( (x, y) )
+
+Now we want to create a polygon object in Draw with these coordinates.
+
+First we get a reference to the current document::
+
+	doc = self.getcomponent()
+
+Then, since documents can be made up of multiple pages,
+we have to get the current page. Since this is not Impress, there is
+only one page, so it is page index 0::
+
+	page = doc.getDrawPages().getByIndex( 0 )
+
+Now we create the polygon on this page using :ref:`utility library <the-utility-library>`::
+
+	import util.draw
+	shape = util.draw.createPolygon( doc, page, [poly] )
+
+A polygon in Draw can be made up of multiple outlines (this way they can have holes for example),
+so ``createPolygon`` expects a list of lists of coordinate pairs -- this is why ``poly`` is put
+in a list here.
+
+And because it is currently off the page, we move it to a sensible position::
+
+	setpos( shape, 10000, 10000 )
+
+And we are done! Save the source code again and test!
+
+.. image:: star.png
+
+About the About dialog
+^^^^^^^^^^^^^^^^^^^^^^
+
+The source code of the :guilabel:`About` dialog is included in every newly created extension.
+This way you can customize it or remove it entirely, but it is also a useful example
+from which you can always copy parts into your own dialogs. A valuable example is how
+the :guilabel:`Debug` button works. The ``addActionListener`` method of the button is used to
+set up the listener::
+
+	dlg.DebugButton.addActionListener( self )
+
+And then we create the method that will be called::
+
+	def on_action_DebugButton( self ):
+
+Use this pattern to easily create button handlers. Such convenient name-based mechanisms
+are not available for every kind of event handler.
+
+Packing a release version OXT
+-----------------------------
+
+Before starting to pack a release version make sure that the dialogs that you have created
+or modified in the development version have been copied back to the development tree.
+The button labeled :guilabel:`Copy dialogs from the installed extension to your development branch`
+in the EOEC dialog can be used to perform this operation.
+
+Once the development tree correctly represents the extension a release version can
+be packed by executing::
+
+	python pack.py "My Extension"
+
+The created ``My_Extension.oxt`` file will be a release build ready for distribution.
+
+Updating an extension
+---------------------
+
+EuroOffice Extension Creator development is an ongoing process, and if you want to use
+features from a newer version you might want to be able to update your extension tree.
+This is possible with the ``update.py`` script.
+
+To update simply execute::
+
+	python update.py "My Extension"
+
+It works by comparing file modification dates, and if the template file is newer than the file
+in your development tree the file will be overwritten.
+
+.. warning::
+
+	This command can destroy your work!
+	
+	To make this less likely it first performs a dry-run and then asks for permission to
+	really update the files. This cautiousness can be disabled with the ``--quiet`` option.
+
+If a file is updated in both the EOEC templates and in your development tree, you may want to
+merge the changes. To do this rename the file in your tree (to :file:`filename.mine` for
+example) and run ``update.py``.
+A new file based on the template will be created and you can manually perform the merging.
+
+To prevent a file from ever getting up list it in the ``dontupdate`` variable in the ``eoec.config``
+file (see :ref:`the-files`).

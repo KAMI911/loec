@@ -1,0 +1,472 @@
+
+.. _the-extension-core:
+
+The Extension Core facilities
+=============================
+
+.. module:: extensioncore
+
+The Extension Core is a set of functions that every EOEC extension depends on.
+It provides the backbone of creating and registering an extension, the run-time
+development mechanism, debugging and a number of essential utilities.
+
+A large part of the functionality is present in the :class:`ComponentBase` class,
+and some parts that are not tied to an extension object are implemented as
+functions.
+
+The ``ComponentBase`` class
+---------------------------
+
+.. class:: ComponentBase
+
+	This is the base class from which extension classes are derived. ``ComponentBase``
+	itself is in turn derived from ``unohelper.Base``, the base class provided by PyUNO.
+	
+	The following interfaces are implemented:
+
+	- XComponent
+	- XInitialization
+	- XJob
+	- XJobExecutor
+	- XServiceDisplayName
+	- XServiceInfo
+	- XServiceName
+	
+	The following methods can be overridden by subclasses to customize their behavior:
+	
+	.. method:: startup()
+	
+		Runs at every time OpenOffice.org starts up.
+		Subclasses may override it to do some kind of initialization here
+		-- the default implementation does not do anything.
+	
+		Try to write your extension so that most of the heavy initialization only happens
+		when it is needed. This way slowing down startup unnecessarily can be avoided.
+	
+	.. method:: firstrun()
+
+		Runs the first time OpenOffice.org starts up after the extension was installed.
+		Subclasses may override it to do some kind of initialization here
+		-- the default implementation does not do anything.
+
+		This is the recommended place to create new menu items.
+
+	.. method:: uninstall()
+
+		Runs when the user presses the :guilabel:`Disable` or :guilabel:`Remove` buttons
+		on the extension in the Extension Manager dialog.
+		Subclasses may override it to do some kind of clean up here
+		-- the default implementation does not do anything.
+
+		This is the recommended place to remove anything that was created in :meth:`firstrun`.
+
+	The following utility methods are provided:
+		
+	.. method:: getcontroller()
+	
+		Returns the controller associated with the current document.
+		For example if the current document is a ``com.sun.star.TextDocument`` ``getcontroller()``
+		will return the associated ``com.sun.star.TextDocumentView``.
+	
+	.. method:: addMenuItem(documenttype, menu, title, command, submenu=False, inside=True)
+	
+		Adds a new menu item to the OpenOffice.org menu system.
+		This addition is permanent. The menu item can only be removed using :meth:`removeMenuItem`.
+		It is recommended to add menu items in the :meth:`firstrun` method and remove all of them
+		in the :meth:`uninstall` method.
+
+		An example creating a new submenu with two menu items in the :guilabel:`Insert` menu::
+		
+			self.addMenuItem('com.sun.star.text.TextDocument',
+					'.uno:InsertMenu', self.localize('submenu'), 'mysubmenu', submenu=True)
+			self.addMenuItem('com.sun.star.text.TextDocument',
+					'mysubmenu', self.localize('item-2'), 'method2')
+			self.addMenuItem('com.sun.star.text.TextDocument',
+					'mysubmenu', self.localize('item-1'), 'method1')
+		
+		The menu items are added in reverse order, so ``item-1`` will be the top item and ``item-2`` the bottom.
+
+		Icons can be assigned to menu items through the xml configuration file :file:`Addons.xcu`.
+		
+		:type documenttype: string
+		:param documenttype: a document type, such as ``'com.sun.star.text.TextDocument'``
+		                     (see :data:`documenttypes`)
+		:type menu: string
+		:param menu: the command URL of the menu item under which (or into which) the new menu item
+		             is to be placed
+		:type title: string
+		:param title: The label to appear to the user. It is recommended to use :meth:`localize`
+		              to get a localized menu item.
+		:type command: string
+		:param command: The internal name of the menu item. For normal menu items this is also
+		                the name of the method to be called when the menu item is clicked. For
+		                submenus this is the command URL that can be used as the ``menu`` parameter
+		                when adding menu items into it.
+				If ``command`` contains a colon (:) it is treated as a command URL.
+		:type submenu: boolean
+		:param submenu: If true a new submenu, that can contain menu items, is created.
+		:type inside: boolean
+		:param inside: If true and ``menu`` refers to a submenu, the new item is created inside this submenu.
+		               Otherwise the new item is created after the item referred to by ``menu`` even if it is
+			       a submenu.
+		
+	.. method:: removeMenuItem(documenttype, command, submenu=False)
+	
+		Removes the menu item or submenu from the menu tree of the given document type.
+
+		:type documenttype: string
+		:param documenttype: a document type, such as ``'com.sun.star.text.TextDocument'``
+		                     (see :data:`documenttypes`)
+		:type command: string
+		:param command: the internal name of the menu item
+		:type submenu: boolean
+		:param submenu: set to true when removing submenus
+
+	.. method:: box(message, kind = 'infobox', buttons = 'OK', title = None)
+
+		Display a message box. Uses ``com.sun.star.awt.Toolkit.createMessageBox()``,
+		but saves a lot of the verbosity of the UNO API. The constants used come from
+		the UNO API and are not validated by this method.
+		
+		The ``infobox`` can only display an :guilabel:`OK` button, so if ``buttons``
+		is not ``'OK'``, kind defaults to ``'querybox'`` instead.
+		
+		:type message: string
+		:param message: the text to display
+		:param kind: one of ``'infobox'``, ``'warningbox'``, ``'errorbox'``, ``'querybox'`` and ``'messbox'``
+		:param buttons: one of ``'OK'``, ``'OK_CANCEL'``, ``'YES_NO'``, ``'YES_NO_CANCEL'``,
+		                ``'RETRY_CANCEL'`` and ``'ABORT_IGNORE_RETRY'``
+		:param title: The title of the message box. Defaults to the localized extension name if ``None``.
+		:rtype: integer
+		:returns: The result of the ``execute()`` call on the message box.
+				Different values are returned depending on which button was pressed.
+				The :attr:`BOXCANCEL, BOXOK, BOXYES, BOXNO, BOXRETRY` attributes can
+				be used to distinguish. ``BOXCANCEL`` has a ``False`` truth value, so simple
+				``OK_CANCEL`` boxes can be evaluated without the use of these constants.
+
+	.. method:: debugexception_and_box(format = None)
+
+		This method can be used in place of :func:`debugexception` where even in release
+		mode the user should be alerted of the problem.
+		
+		``format`` can be used to customize the error message. By default it is ::
+		
+			'An unexpected error (%(kind)s) occured at line %(linenumber)s of %(filename)s.'
+		
+		The format string can contain insertion points for ``kind`` (the exception type),
+		``filename``, ``linenumber``, ``functionname`` and ``text`` (the message of the exception).
+		
+		This method also calls :func:`debugexception` so in debug mode the entire stack trace
+		is recorded.
+		
+		It is recommended to add instructions for the user in the format string (such as "Please let us
+		know about this problem at support@example.com.").
+
+	.. method:: dumpMenus(documenttype)
+	
+		This method outputs a representation of the complete menu system of the given document type
+		to the debug output. It is useful for finding the right command URL when placing your menu items.
+		
+	.. method:: getconfig(nodepath, update=False)
+	
+		Returns the ``com.sun.star.configuration.ConfigurationAccess`` object associated with the
+		given node path.
+		
+		See the :attr:`config` attribute.
+		
+		:param update: If ``True``, a ``ConfigurationUpdateAccess`` object is instead returned,
+		               that can be used to change configuration settings.
+		
+	.. method:: localize(string, language=None)
+	
+		Returns the localized string associated with the internal string ``string``.
+		
+		If ``language`` is ``None``, the language is automatically chosen based on the
+		:attr:`SUPPORTED_LANGUAGES` attribute. If the current user interface language
+		(as given by ``org.openoffice.Setup.L10N.ooLocale``) is in the list of supported
+		languages, it is used, otherwise the first element of the list (the fallback language)
+		is used in its place.
+		
+		If ``language`` is not ``None``, it should be the two-letter code of a language to be used
+		instead of the default.
+		
+		The localizations are loaded from :file:`MyNameMyExtensionDialogs/DialogStrings_{language}.properties`
+		(with the two-letter code for the language). See :ref:`the description of this file <localization-file`.
+		
+		:returns: Normally the localized string is returned. However if there is no localization
+		          for the given string in any language, the string ``'unlocalized: '+string'`` is
+		          returned and if there are localizations just not in the chosen language, the string
+		          ``'unlocalized for %s: %s'%(language, string)`` is returned instead. These
+		          can be used to quickly spot missing translations on the user interface.
+		
+	.. method:: createdialog(dialogname)
+	
+		Creates an instance of the given dialog using ``com.sun.star.awt.DialogProvider.createDialog()``.
+		
+		For increased convenience, the dialog controls are accessible as attributes of the returned object.
+		For example if the dialog ``Dialog1`` has a button named ``Button1`` adding an ActionListener can
+		be done like this::
+		
+			dlg = self.createdialog( 'Dialog1' )
+			dlg.Button1.addActionListener( self )
+		
+		This is mostly equivalent to ``dlg.getControl( 'Button1' ).addActionListener( self )``, but is
+		more efficient when the control is accessed multiple times, because each time an UNO call is saved.
+		
+		For technical reasons a wrapper object is created around the ``com.sun.star.awt.XDialog``
+		object to enable this convenient access. The original ``XDialog`` object can be accessed as the
+		``xdialog`` attribute of the wrapper. The wrapper forwards every attribute access to the ``XDialog``
+		object, so accessing the original object is practically never necessary.
+		
+		To display a dialog, call its ``execute()`` method.
+
+		:param dialogname: the name of the dialog that you have used in the OpenOffice.org dialog designer
+		:returns: an instance of the given dialog
+		
+	.. method:: getdesktop()
+	
+		Returns the ``com.sun.star.frame.Desktop`` object.
+		
+	.. method:: getcomponent()
+	
+		Returns the currently active document object as returned by
+		``com.sun.star.frame.Desktop.getCurrentComponent()``.
+		When there is no current component for some reason, an arbitrary open
+		document is returned. If there are no open documents, ``None`` is returned.
+		
+	.. method:: getcontroller()
+	
+		Returns the view associated with the currently active document object as returned by
+		``com.sun.star.frame.Desktop.getCurrentComponent().getCurrentController()``.
+
+	The ``ComponentBase`` class also sets up a few attributes that can be useful:
+	
+	.. attribute:: ctx
+	
+		The ``com.sun.star.uno.XComponentContext`` object that was given to the constructor.
+		It can be used to get the "Service Manager" object which can instantiate a number
+		of object types.
+	
+	.. attribute:: path
+	
+		Contains the root path of the installed extension. It is a normal path, not a file URL.
+		
+	.. attribute:: uilanguage
+	
+		The two-letter code of the UI language of OpenOffice.org. If the actual UI language is
+		not in the :attr:`SUPPORTED_LANGUAGES` list, then ``uilanguage`` is instead set to
+		the fallback language (the first language in the list).
+		
+	.. attribute:: SUPPORTED_LANGUAGES
+	
+		This attribute is set by subclasses to a list of the two-letter language codes of
+		supported languages. For languages not in this list, the fallback language (the first
+		language in the list) is used.
+	
+	.. attribute:: config
+	
+		Provides access to the persistent configuration of the extension.
+		It is a ``com.sun.star.configuration.ConfigurationUpdateAccess`` object associated with the
+		node ``my.prefix.MyExtensionSettings/ConfigNode``.
+		
+		Keep in mind that for the change to the configuration to be persistent, the ``commitChanges()``
+		method has to be called.
+		
+		For example on the first start up (after :meth:`firstrun` was called) the ``FirstRun`` configuration
+		setting is updated like this::
+		
+			self.config.FirstRun = False
+			self.config.commitChanges()
+
+	.. attribute:: BOXCANCEL, BOXOK, BOXYES, BOXNO, BOXRETRY
+	
+		These are the possible return values from the :meth:`box` method.
+		``BOXCANCEL`` is the only one of these with a ``False`` truth value.
+
+The debug framework
+-------------------
+
+The Extension Core provides a basic debugging framework.
+Since debugging is most important when things go wrong, and when things
+go wrong there is not much that can be relied on, debug messages are
+output to either ``stderr`` (on Linux) or to a debug file (:file:`c:\\debug.txt`
+on Windows and :file:`/tmp/debug.txt` on Mac).
+
+To provide some degree of convenience, the EOEC dialog displays the contents
+of the debug file (if there is one).
+
+On platforms with debug files the debug file is truncated on startup and
+then on calls to the :func:`debug` function it is opened, appended and closed.
+
+Note that all debug output is silently omitted if the extension is not
+in development mode.
+
+The relevant functions are:
+
+.. function:: debug(*msgs)
+
+	The list of objects in ``msg`` is written to the debug output
+	on separate lines. The objects are first converted to unicode strings
+	and then encoded in UTF-8.
+	
+.. function:: dd(*args)
+
+	For each of the objects in ``args`` writes to the debug output
+	the result of ``dir(obj)``. It is a shorthand for discovering
+	what methods and attributes a UNO object has.
+	
+.. function:: debugexception()
+
+	Writes the last exception (with stack trace) to the debug output.
+	
+	You can notice in the source code of the Extension Core and the blank extension
+	created by ``create.py`` that calls from the "outside" are wrapped in try-except-debugexception
+	blocks. This is very useful for debugging, because otherwise the exception is propagated
+	to OpenOffice.org and will most likely result in a crash that gives little information.
+	It is recommended that in new methods that implement UNO interfaces extension developers
+	follow the same convention even when the method does not appear to do anything "dangerous".
+	
+	An example of this important principle::
+	
+		# XActionListener
+		def actionPerformed(self, event):
+			try:
+
+				pass		# suppose we do something...
+				
+			except:
+				debugexception()
+
+.. function:: debugstack()
+
+	Writes the current stack trace to the debug output.
+				
+Utilities
+---------
+
+The Extension Core also includes a number of useful functions and constants
+that are used by :class:`ComponentBase` and can also be useful to developers of extensions.
+
+Normally extensions import ``*`` from ``extensioncore``, so these utilities are conveniently
+available.
+
+.. data:: DEBUG
+
+	This boolean tells if we are in development mode.
+
+.. class:: SelfUpdating
+
+	This base-class provides a modified ``__getattribute__`` implementation that (when in
+	development mode) checks if a newer version of the source file is available (based on
+	file modification dates) and reloads it if necessary, modifying this
+	instance and future instances of the class.
+	
+	:class:`ComponentBase` is derived from this class, but if other classes need this functionality
+	they can derive from ``SelfUpdating`` too.
+
+.. function:: props(*args,**kwargs)
+
+	The UNO API often expects parameters to be ``com.sun.star.beans.PropertyValue`` arrays.
+	This function makes it easy to create such arrays.
+	
+	``props`` can be called with either a single dictionary object as the parameter,
+	or with keyword arguments. It will then turn the given dictionary or the keyword arguments
+	into a ``com.sun.star.beans.PropertyValue`` array and return this array.
+
+.. function:: anyprops(*args,**kwargs)
+
+	The same as :func:`props` except the resulting array is wrapped into an ``Any`` object,
+	which is needed in some UNO calls.
+
+.. function:: namedvalues(*args,**kwargs)
+
+	Same as :func:`props` except with ``NamedValue`` arrays instead of ``PropertyValue`` arrays.
+	
+.. function:: anynamedvalues(*args,**kwargs)
+
+	Same as :func:`anyprops` except with ``NamedValue`` arrays instead of ``PropertyValue`` arrays.
+
+.. function:: unprops(props)
+
+	The UNO API often returns values as ``com.sun.star.beans.PropertyValue`` arrays.
+	``unprops`` unpacks these arrays into a more convenient format.
+	
+	The class of the returned object is derived from ``dict``, so the results are
+	accessible as in a normal dictionary object. However for added convenience it is also
+	possible to access the values as attributes of the returned object.
+	
+	For example to access the command URL of the first menu item in some menu system::
+	
+		settings = xUIMgr.getSettings('private:resource/menubar/menubar', True)
+		menu = unprops(settings.getByIndex(0))
+		debug(menu.CommandURL)
+	
+	This function also works with ``NamedValue`` arrays.
+
+.. function:: enumerate(obj)
+
+	UNO ``Sequence`` objects are converted to tuples when they come to the Python side
+	and are easy to work with. However the OpenOffice.org API has a number of different
+	container types that are not automatically converted and can be less convenient to
+	work with.
+	
+	``enumerate`` is a generator function for these container types.
+	An example usage for relabeling footnotes::
+
+		for footnote in enumerate( self.getcomponent().Footnotes ):
+			footnote.Label = 'Footnote ' + footnote.Label
+
+	The following kinds of objects are supported:
+
+	-	``com.sun.star.container.XEnumerationAccess``
+	-	``com.sun.star.container.XEnumeration``
+	-	``com.sun.star.container.XIndexAccess``
+	-	``com.sun.star.container.XNameAccess`` (while this is a dictionary-like container only the values are yielded not the keys)
+
+.. function:: safeeval(code)
+
+	Evaluates a Python expression making sure it is safe.
+	
+	The expression can contain only a very limited set of language elements,
+	that are only sufficient for describing objects made up of basic Python types.
+	This way a dictionary mapping strings to lists of integers for example
+	can be simply stored by calling ``repr()`` on it, and can be loaded using
+	this function.
+
+.. data:: documenttypes
+
+	This variable lists the possible document types (such as ``'com.sun.star.text.TextDocument'``)
+	in OpenOffice.org.
+
+	Note that not every build of OpenOffice.org has all of these document types!
+
+.. class:: propset
+
+	This class is a lightweight implementation of ``com.sun.star.beans.XPropertySet``
+	and ``com.sun.star.lang.XServiceInfo``. None of the methods in the
+	``XPropertySet`` interface are actually implemented except for ``getPropertyValue()``
+	and ``setPropertyValue()``. This is appropriate for most purposes, such as for inserting
+	a new item into a ``com.sun.star.ui.ActionTriggerContainer``. Error handling is also not
+	implemented.
+
+	.. method:: __init__( *args, **kwargs )
+
+		The constructor can be called with either a single dictionary object as the parameter,
+		or with keyword arguments. It will then use the given dictionary or the keyword arguments
+		as the initial property set.
+
+.. function:: init(cls, *services)
+
+	Registers the given class in the OpenOffice.org type database for the given services.
+	This function should not be called arbitrarily -- it is a part of the extension initialization
+	process. It is called in the last line of ``extensionname.py``. Extensions automatically
+	support the ``com.sun.star.task.Job`` service but if further services are needed to be
+	registered for they can be added to this function call.
+	
+	Of course the required interfaces should be implemented when registering for a service.
+
+	:type cls: class
+	:param cls: the class to register
+	:type services: strings
+	:param services: the names of the services the class supports
+

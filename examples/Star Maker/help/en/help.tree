@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view>
+  <help_section application="danieldarabos" id="danieldarabos" title="Daniel Darabos's Extensions">
+    <node id="starmaker" title="Star Maker">
+      <topic id="danieldarabos/org.openoffice.starmaker/page1.xhp">How to use Star Maker</topic>
+    </node>
+  </help_section>
+</tree_view>

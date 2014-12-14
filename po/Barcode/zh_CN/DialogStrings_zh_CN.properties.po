@@ -1,0 +1,801 @@
+#. extracted from /home/kami/svn/ooop/trunk/utils/translation/temp/template/DialogStrings_zh_CN.properties, /home/kami/bzr/kami911/barcode-improved/examples/Barcode/EOECBarcodeDialogs/DialogStrings_zh_CN.properties
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-31 05:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.7.0\n"
+"X-Accelerator-Marker: &\n"
+
+#. # Strings for Dialog Library EOECBarcodeDialogs
+#: 590.About.Title
+msgctxt "590.About.Title"
+msgid "About Barcode"
+msgstr "关于 Barcode"
+
+#: 595.About.Label2.Label
+msgid "For detailed help press the help button!"
+msgstr "请按帮助按钮查看详情"
+
+#: 599.About.URL.Label
+msgctxt "599.About.URL.Label"
+msgid "https://launchpad.net/eoec/"
+msgstr "https://launchpad.net/eoec/"
+
+#: 603.About.Label1.Label
+msgid ""
+"An example extension created with the EuroOffice Extension Creator (by "
+"MultiRacio Ltd.) Code: Daniel Darabos, Kalman Szalai; Chinese translation: "
+"Jack Shen; Danish translation: Leif Lodahl; Dutch translation: Nouws Cor; "
+"French translation: Sophie Gautier; German translation: Jens Binfet; "
+"Japanese translation: Takaya Kubota; Russian translation: Basil Shubin; "
+"Serbian translation: Goran Rakic"
+msgstr ""
+"一个使用EuroOffice Extension Creator建立的示例扩展( 来至 MultiRacio Ltd.) "
+"Code: Daniel Darabos, Kalman Szalai; Chinese translation: Jack Shen; Danish "
+"translation: Leif Lodahl; Dutch translation: Nouws Cor; French translation: "
+"Sophie Gautier; German translation: Jens Binfet; Japanese translation: "
+"Takaya Kubota; Russian translation: Basil Shubin; Serbian translation: Goran "
+"Rakic"
+
+#: 605.About.CommandButton1.Label
+msgid "OK"
+msgstr "确认"
+
+#: 607.About.CommandButton2.Label
+msgctxt "607.About.CommandButton2.Label"
+msgid "Help"
+msgstr "帮助"
+
+#: 608.About.HelpText
+msgctxt "608.About.HelpText608.About.HelpText"
+msgid ""
+msgstr ""
+
+#: 609.ExtensionCreator.HelpText
+msgctxt "609.ExtensionCreator.HelpText"
+msgid ""
+msgstr ""
+
+#: 610.ExtensionCreator.Title
+msgid "EuroOffice Extension Creator"
+msgstr "EuroOffice Extension Creator"
+
+#: 615.ExtensionCreator.SaveDialogs.HelpText
+msgid "Copy dialogs from the installed extension to your development branch"
+msgstr ""
+
+#: 616.ExtensionCreator.SaveDialogs.Label
+msgid "Save dialogs"
+msgstr ""
+
+#: 617.ExtensionCreator.Label1.HelpText
+msgctxt "617.ExtensionCreator.Label1.HelpText"
+msgid ""
+msgstr ""
+
+#: 618.ExtensionCreator.Label1.Label
+msgid "Barcode is in debug mode."
+msgstr "Barcode 处于调试模式"
+
+#: 625.ExtensionCreator.CodeField.HelpText
+msgctxt "625.ExtensionCreator.CodeField.HelpText"
+msgid ""
+msgstr ""
+
+#: 626.ExtensionCreator.CodeField.Text
+msgctxt "626.ExtensionCreator.CodeField.Text"
+msgid ""
+msgstr ""
+
+#: 627.ExtensionCreator.ExecuteCode.HelpText
+msgctxt "627.ExtensionCreator.ExecuteCode.HelpText"
+msgid ""
+msgstr ""
+
+#: 628.ExtensionCreator.ExecuteCode.Label
+msgid "Execute code"
+msgstr "执行代码"
+
+#: 631.About.DebugButton.HelpText
+msgctxt "631.About.DebugButton.HelpText"
+msgid ""
+msgstr ""
+
+#: 632.About.DebugButton.Label
+msgid "Debug"
+msgstr "调试"
+
+#: 635.ExtensionCreator.Close.HelpText
+msgctxt "635.ExtensionCreator.Close.HelpText"
+msgid ""
+msgstr ""
+
+#: 636.ExtensionCreator.Close.Label
+msgid "Close"
+msgstr "关闭"
+
+#: 638.ExtensionCreator.TextField1.Text
+msgctxt "638.ExtensionCreator.TextField1.Text"
+msgid ""
+msgstr ""
+
+#: 639.ExtensionCreator.OutputField.HelpText
+msgctxt "639.ExtensionCreator.OutputField.HelpText"
+msgid ""
+msgstr ""
+
+#: 640.ExtensionCreator.OutputField.Text
+msgctxt "640.ExtensionCreator.OutputField.Text"
+msgid ""
+msgstr ""
+
+#: 641.ExtensionCreator.Label2.HelpText
+msgctxt "641.ExtensionCreator.Label2.HelpText"
+msgid ""
+msgstr ""
+
+#: 642.ExtensionCreator.Label2.Label
+msgid "Debug output:"
+msgstr "调试输出："
+
+#: 643.Barcode.HelpText
+msgctxt "643.Barcode.HelpText"
+msgid ""
+msgstr ""
+
+#: 644.Barcode.Title
+msgid "Insert Barcode"
+msgstr "插入条形码"
+
+#: 645.Barcode.OK.HelpText
+msgctxt "645.Barcode.OK.HelpText"
+msgid ""
+msgstr ""
+
+#: 646.Barcode.OK.Label
+msgid "Insert"
+msgstr "确认"
+
+#: 647.Barcode.Cancel.HelpText
+msgctxt "647.Barcode.Cancel.HelpText"
+msgid ""
+msgstr ""
+
+#: 648.Barcode.Cancel.Label
+msgid "Cancel"
+msgstr "取消"
+
+#: 651.Barcode.CodeField.HelpText
+msgctxt "651.Barcode.CodeField.HelpText"
+msgid ""
+msgstr ""
+
+#: 652.Barcode.CodeField.Text
+msgctxt "652.Barcode.CodeField.Text"
+msgid ""
+msgstr ""
+
+#: 655.Barcode.Help.HelpText
+msgctxt "655.Barcode.Help.HelpText"
+msgid ""
+msgstr ""
+
+#: 656.Barcode.Help.Label
+msgctxt "656.Barcode.Help.Label"
+msgid "Help"
+msgstr "帮助"
+
+#: 659.Barcode.BarcodeType.HelpText
+msgctxt "659.Barcode.BarcodeType.HelpText"
+msgid ""
+msgstr ""
+
+#: 660.Barcode.BarcodeType.Label
+msgid "Barcode type"
+msgstr "条形码类型"
+
+#: 663.Barcode.EAN13.HelpText
+msgctxt "663.Barcode.EAN13.HelpText"
+msgid ""
+msgstr ""
+
+#: 664.Barcode.EAN13.Label
+msgid "EAN-13"
+msgstr "EAN-13"
+
+#: 675.Barcode.Bookland.HelpText
+msgid "ISBN-13 barcode from ISBN-10. Also known as Bookland."
+msgstr "ISBN-10  升位转换为 ISBN-13 .  即添加Bookland码978"
+
+#: 676.Barcode.Bookland.Label
+msgid "ISBN-13 from ISBN-10"
+msgstr "ISBN-10  升位转换为 ISBN-13"
+
+#: 685.Barcode.UPCA.HelpText
+msgctxt "685.Barcode.UPCA.HelpText"
+msgid ""
+msgstr ""
+
+#: 686.Barcode.UPCA.Label
+msgid "UPC-A"
+msgstr "UPC-A"
+
+#: 693.Barcode.BarcodeValue.HelpText
+msgctxt "693.Barcode.BarcodeValue.HelpText"
+msgid ""
+msgstr ""
+
+#: 694.Barcode.BarcodeValue.Label
+msgid "Barcode value"
+msgstr ""
+
+#: 699.Barcode.JAN.HelpText
+msgctxt "699.Barcode.JAN.HelpText"
+msgid ""
+msgstr ""
+
+#: 700.Barcode.JAN.Label
+msgid "JAN"
+msgstr "JAN"
+
+#: 731.Barcode.ISBN13.HelpText
+msgctxt "731.Barcode.ISBN13.HelpText"
+msgid ""
+msgstr ""
+
+#: 732.Barcode.ISBN13.Label
+msgid "ISBN-13"
+msgstr "ISBN-13"
+
+#: 793.Barcode.WithChecksum.HelpText
+msgctxt "793.Barcode.WithChecksum.HelpText"
+msgid ""
+msgstr ""
+
+#: 794.Barcode.WithChecksum.Label
+msgid "Add checksum digit"
+msgstr "添加检校位"
+
+#: 795.Barcode.FixedLine1.HelpText
+msgctxt "795.Barcode.FixedLine1.HelpText"
+msgid ""
+msgstr ""
+
+#: 796.Barcode.FixedLine1.Label
+msgctxt "796.Barcode.FixedLine1.Label"
+msgid ""
+msgstr ""
+
+#: 801.Barcode.EAN8.HelpText
+msgctxt "801.Barcode.EAN8.HelpText"
+msgid ""
+msgstr ""
+
+#: 802.Barcode.EAN8.Label
+msgid "EAN-8"
+msgstr "EAN-8"
+
+#: 803.Barcode.UPCE.HelpText
+msgctxt "803.Barcode.UPCE.HelpText"
+msgid ""
+msgstr ""
+
+#: 804.Barcode.UPCE.Label
+msgid "UPC-E"
+msgstr "UPC-E"
+
+#: EAN-8-length
+msgid "EAN-8 barcodes are 8 digits long with the checksum digit."
+msgstr "EAN-8，连检校位共8位长。"
+
+#: EAN-8-length-almost
+msgid ""
+"EAN-8 barcodes are 8 digits long with the checksum digit. Please provide the "
+"checksum digit or set it to be automatically calculated!"
+msgstr "EAN-8，连检校位共8位长。请提供检校位或设置为自动计算。"
+
+#: EAN-8-length-checksum
+msgid ""
+"EAN-8 barcodes are 7 digits long not counting the checksum digit. You have "
+"selected the checksum to be automatically calculated."
+msgstr "EAN-8，不计校位共7位长。你已把检校位设置为自动计算。"
+
+#: EAN-13-length
+msgid "EAN-13 barcodes are 13 digits long with the checksum digit."
+msgstr "EAN-13，连检校位共13位长。"
+
+#: EAN-13-length-almost
+msgid ""
+"EAN-13 barcodes are 13 digits long with the checksum digit. Please provide "
+"the checksum digit or set it to be automatically calculated!"
+msgstr "EAN-13，连检校位共13位长。请提供检校位或设置为自动计算。"
+
+#: EAN-13-length-checksum
+msgid ""
+"EAN-13 barcodes are 12 digits long not counting the checksum digit. You have "
+"selected the checksum to be automatically calculated."
+msgstr "EAN-13，不计校位共12位长。你已把检校位设置为自动计算。"
+
+#: ISBN-10-length
+msgid "ISBN-10 barcodes are 10 digits long with the checksum digit."
+msgstr "ISBN-10，连检校位共10位长。"
+
+#: ISBN-10-length-almost
+msgid ""
+"ISBN-10 barcodes are 10 digits long with the checksum digit. Please provide "
+"the checksum digit or set it to be automatically calculated!"
+msgstr "ISBN-10，连检校位共10位长。请提供检校位或设置为自动计算。"
+
+#: ISBN-10-length-checksum
+msgid ""
+"ISBN-10 barcodes are 9 digits long not counting the checksum digit. You have "
+"selected the checksum to be automatically calculated."
+msgstr "ISBN-10，不计校位共9位长。你已把检校位设置为自动计算。"
+
+#: ISBN-13-length
+msgid "ISBN-13 barcodes are 13 digits long with the checksum digit."
+msgstr "ISBN-13，连检校位共13位长。"
+
+#: ISBN-13-length-almost
+msgid ""
+"ISBN-13 barcodes are 13 digits long with the checksum digit. Please provide "
+"the checksum digit or set it to be automatically calculated!"
+msgstr "ISBN-13，连检校位共13位长。请提供检校位或设置为自动计算。"
+
+#: ISBN-13-length-checksum
+msgid ""
+"ISBN-13 barcodes are 12 digits long not counting the checksum digit. You "
+"have selected the checksum to be automatically calculated."
+msgstr "ISBN-13，不计校位共12位长。你已把检校位设置为自动计算。"
+
+#: JAN-length
+msgid "JAN barcodes are 11 digits long with the checksum digit."
+msgstr "JAN，连检校位共11位长。"
+
+#: JAN-length-almost
+msgid ""
+"JAN barcodes are 11 digits long with the checksum digit. Please provide the "
+"checksum digit or set it to be automatically calculated!"
+msgstr "JAN，连检校位共11位长。请提供检校位或设置为自动计算。"
+
+#: JAN-length-checksum
+msgid ""
+"JAN barcodes are 10 digits long not counting the checksum digit. You have "
+"selected the checksum to be automatically calculated."
+msgstr "JAN，不计校位共10位长。你已把检校位设置为自动计算。"
+
+#: UPC-A-length
+msgid "UPC-A barcodes are 12 digits long with the checksum digit."
+msgstr "UPC-A，连检校位共12位长。"
+
+#: UPC-A-length-almost
+msgid ""
+"UPC-A barcodes are 12 digits long with the checksum digit. Please provide "
+"the checksum digit or set it to be automatically calculated!"
+msgstr "UPC-A，连检校位共12位长。请提供检校位或设置为自动计算。"
+
+#: UPC-A-length-checksum
+msgid ""
+"UPC-A barcodes are 11 digits long not counting the checksum digit. You have "
+"selected the checksum to be automatically calculated."
+msgstr "UPC-A，不计校位共11位长。你已把检校位设置为自动计算。"
+
+#: UPC-E-length
+msgid "UPC-E barcodes are 8 digits long if the checksum digit is included."
+msgstr "UPC-E，连检校位共8位长。"
+
+#: UPC-E-length-almost
+msgid ""
+"UPC-E barcodes are 8 digits long if the checksum digit is included. Please "
+"provide the checksum digit or set it to be automatically calculated!"
+msgstr "UPC-E，连检校位共8位长。请提供检校位或设置为自动计算。"
+
+#: UPC-E-length-checksum
+msgid ""
+"UPC-E barcodes are 6 or 7 digits long not counting the checksum digit. You "
+"have selected the checksum to be automatically calculated."
+msgstr "UPC-E，不计校位6或7位长。你已把检校位设置为自动计算。"
+
+#: UPC-E-zero
+msgid ""
+"UPC-E codes in a number system other than 0 are not supported currently."
+msgstr "目前不支持除0以外的阿拉伯数字UPC-E编码"
+
+#: INTERLEAVED2OF5-length-even
+msgid ""
+"You chose to have the checksum digit added but gave an input of even length. "
+"Interleaved 2 of 5 can only encode even length inputs, so either the "
+"checksum digit has to be removed or the input has to be of odd length."
+msgstr ""
+"You chose to have the checksum digit added but gave an input of even length. "
+"Interleaved 2 of 5 can only encode even length inputs, so either the "
+"checksum digit has to be removed or the input has to be of odd length."
+
+#: INTERLEAVED2OF5-length-odd
+msgid ""
+"The input has an odd length. Interleaved 2 of 5 can only encode even length "
+"inputs, so either a checksum digit has to be added or the input has to be of "
+"even length."
+msgstr ""
+"The input has an odd length. Interleaved 2 of 5 can only encode even length "
+"inputs, so either a checksum digit has to be added or the input has to be of "
+"even length."
+
+#: CODE-128-can-not-be-encoded
+msgid "Some of the characters in the input can not be encoded in Code 128."
+msgstr "Some of the characters in the input can not be encoded in Code 128."
+
+#: CODE-128-checksum-will-be-calculated
+msgid "The checksum will be automatically added."
+msgstr "The checksum will be automatically added."
+
+#: about
+msgctxt "about"
+msgid "About Barcode"
+msgstr "关于 Barcode"
+
+#: aboutURL
+msgctxt "aboutURL"
+msgid "https://launchpad.net/eoec/"
+msgstr "https://launchpad.net/eoec/"
+
+#: menuitem
+msgctxt "menuitem"
+msgid "Barcode"
+msgstr "条形码"
+
+#: only-decimal
+msgid "Only decimal digits please."
+msgstr "只能输入阿拉伯数字"
+
+#: title
+msgctxt "title"
+msgid "Barcode"
+msgstr "Barcode"
+
+#: 813.Barcode.STANDARD2OF5.HelpText
+msgctxt "813.Barcode.STANDARD2OF5.HelpText"
+msgid ""
+msgstr ""
+
+#: 814.Barcode.STANDARD2OF5.Label
+msgid "Standard 2 of 5 (Code 25)"
+msgstr ""
+
+#: 817.Barcode.INTERLEAVED2OF5.HelpText
+msgctxt "817.Barcode.INTERLEAVED2OF5.HelpText"
+msgid ""
+msgstr ""
+
+#: 818.Barcode.INTERLEAVED2OF5.Label
+msgid "Interleaved 2 of 5 (ITF 25)"
+msgstr ""
+
+#: 819.Barcode.CODE128.Label
+msgid "Code 128"
+msgstr ""
+
+#: 822.Barcode.SizeFrame.HelpText
+msgctxt "822.Barcode.SizeFrame.HelpText"
+msgid ""
+msgstr ""
+
+#: 823.Barcode.SizeFrame.Label
+msgid "Barcode size"
+msgstr "Barcode size"
+
+#: 837.Barcode.Width.HelpText
+msgctxt "837.Barcode.Width.HelpText"
+msgid ""
+msgstr ""
+
+#: 838.Barcode.Width.Label
+msgid "percent of original width"
+msgstr "percent of original width"
+
+#: 852.Barcode.Height.HelpText
+msgctxt "852.Barcode.Height.HelpText"
+msgid ""
+msgstr ""
+
+#: 853.Barcode.Height.Label
+msgid "percent of original height"
+msgstr "percent of original height"
+
+#: 882.Barcode.WidthModify.HelpText
+msgctxt "882.Barcode.WidthModify.HelpText"
+msgid ""
+msgstr ""
+
+#: 883.WidthModify.StringItemList
+msgctxt "883.WidthModify.StringItemList"
+msgid "60"
+msgstr "60"
+
+#: 884.WidthModify.StringItemList
+msgctxt "884.WidthModify.StringItemList"
+msgid "70"
+msgstr "70"
+
+#: 885.WidthModify.StringItemList
+msgctxt "885.WidthModify.StringItemList"
+msgid "80"
+msgstr "80"
+
+#: 886.WidthModify.StringItemList
+msgctxt "886.WidthModify.StringItemList"
+msgid "90"
+msgstr "90"
+
+#: 887.WidthModify.StringItemList
+msgctxt "887.WidthModify.StringItemList"
+msgid "100"
+msgstr "100"
+
+#: 888.WidthModify.StringItemList
+msgid "110"
+msgstr "110"
+
+#: 889.WidthModify.StringItemList
+msgid "120"
+msgstr "120"
+
+#: 890.Barcode.WidthModify.Text
+msgctxt "890.Barcode.WidthModify.Text"
+msgid "100"
+msgstr "100"
+
+#: 891.Barcode.HeightModify.HelpText
+msgctxt "891.Barcode.HeightModify.HelpText"
+msgid ""
+msgstr ""
+
+#: 892.HeightModify.StringItemList
+msgctxt "892.HeightModify.StringItemList"
+msgid "10"
+msgstr "10"
+
+#: 893.HeightModify.StringItemList
+msgctxt "893.HeightModify.StringItemList"
+msgid "20"
+msgstr "20"
+
+#: 894.HeightModify.StringItemList
+msgid "30"
+msgstr "30"
+
+#: 895.HeightModify.StringItemList
+msgid "40"
+msgstr "40"
+
+#: 896.HeightModify.StringItemList
+msgid "50"
+msgstr "50"
+
+#: 897.HeightModify.StringItemList
+msgctxt "897.HeightModify.StringItemList"
+msgid "60"
+msgstr "60"
+
+#: 898.HeightModify.StringItemList
+msgctxt "898.HeightModify.StringItemList"
+msgid "70"
+msgstr "70"
+
+#: 899.HeightModify.StringItemList
+msgctxt "899.HeightModify.StringItemList"
+msgid "80"
+msgstr "80"
+
+#: 900.HeightModify.StringItemList
+msgctxt "900.HeightModify.StringItemList"
+msgid "90"
+msgstr "90"
+
+#: 901.HeightModify.StringItemList
+msgctxt "901.HeightModify.StringItemList"
+msgid "100"
+msgstr "100"
+
+#: 902.Barcode.HeightModify.Text
+msgctxt "902.Barcode.HeightModify.Text"
+msgid "100"
+msgstr "100"
+
+#: 903.Barcode.FrameControl1.HelpText
+msgctxt "903.Barcode.FrameControl1.HelpText"
+msgid ""
+msgstr ""
+
+#: 904.Barcode.FrameControl1.Label
+msgid "Mass creation of barcodes"
+msgstr "Barcode size"
+
+#: 907.Barcode.MassDisabled.HelpText
+msgctxt "907.Barcode.MassDisabled.HelpText"
+msgid ""
+msgstr ""
+
+#: 908.Barcode.MassDisabled.Label
+msgid "Only one value"
+msgstr "OptionButton1"
+
+#: 913.Barcode.MultipleText.HelpText
+msgctxt "913.Barcode.MultipleText.HelpText"
+msgid ""
+msgstr ""
+
+#: 914.Barcode.MultipleText.Label
+msgid "Multiple value with separator:"
+msgstr "OptionButton1"
+
+#: 917.Barcode.FromFile.HelpText
+msgctxt "917.Barcode.FromFile.HelpText"
+msgid ""
+msgstr ""
+
+#: 918.Barcode.FromFile.Label
+msgid "From file:"
+msgstr "OptionButton1"
+
+#: 919.Barcode.FileControl1.HelpText
+msgctxt "919.Barcode.FileControl1.HelpText"
+msgid ""
+msgstr ""
+
+#: 920.Barcode.FileControl1.Text
+msgctxt "920.Barcode.FileControl1.Text"
+msgid ""
+msgstr ""
+
+#: 927.Barcode.MultipleSeparator.HelpText
+msgctxt "927.Barcode.MultipleSeparator.HelpText"
+msgid ""
+msgstr ""
+
+#: 928.MultipleSeparator.StringItemList
+msgid ","
+msgstr ""
+
+#: 929.MultipleSeparator.StringItemList
+msgid ";"
+msgstr ""
+
+#: 930.MultipleSeparator.StringItemList
+msgid "/"
+msgstr ""
+
+#: 931.MultipleSeparator.StringItemList
+msgid "\\"
+msgstr ""
+
+#: 932.Barcode.MultipleSeparator.Text
+msgctxt "932.Barcode.MultipleSeparator.Text"
+msgid ""
+msgstr ""
+
+#: 933.Barcode.ComboBox1.HelpText
+msgctxt "933.Barcode.ComboBox1.HelpText"
+msgid ""
+msgstr ""
+
+#: 938.Barcode.ComboBox1.Text
+msgctxt "938.Barcode.ComboBox1.Text"
+msgid ""
+msgstr ""
+
+#: 945.ComboBox1.StringItemList
+msgid "1"
+msgstr ""
+
+#: 946.ComboBox1.StringItemList
+msgid "2"
+msgstr ""
+
+#: 947.ComboBox1.StringItemList
+msgid "3"
+msgstr ""
+
+#: 948.ComboBox1.StringItemList
+msgid "4"
+msgstr ""
+
+#: 949.ComboBox1.StringItemList
+msgid "5"
+msgstr ""
+
+#: 950.ComboBox1.StringItemList
+msgid "6"
+msgstr ""
+
+#: 951.ComboBox1.StringItemList
+msgid "7"
+msgstr ""
+
+#: 952.ComboBox1.StringItemList
+msgid "8"
+msgstr ""
+
+#: 953.ComboBox1.StringItemList
+msgid "9"
+msgstr ""
+
+#: 954.ComboBox1.StringItemList
+msgctxt "954.ComboBox1.StringItemList"
+msgid "10"
+msgstr ""
+
+#: 955.ComboBox1.StringItemList
+msgid "11"
+msgstr ""
+
+#: 956.ComboBox1.StringItemList
+msgid "12"
+msgstr ""
+
+#: 957.ComboBox1.StringItemList
+msgid "13"
+msgstr ""
+
+#: 958.ComboBox1.StringItemList
+msgid "14"
+msgstr ""
+
+#: 959.ComboBox1.StringItemList
+msgid "15"
+msgstr ""
+
+#: 960.ComboBox1.StringItemList
+msgid "16"
+msgstr ""
+
+#: 961.ComboBox1.StringItemList
+msgid "17"
+msgstr ""
+
+#: 962.ComboBox1.StringItemList
+msgid "18"
+msgstr ""
+
+#: 963.ComboBox1.StringItemList
+msgid "19"
+msgstr ""
+
+#: 964.ComboBox1.StringItemList
+msgctxt "964.ComboBox1.StringItemList"
+msgid "20"
+msgstr ""
+
+#: 967.Barcode.FileRow.HelpText
+msgctxt "967.Barcode.FileRow.HelpText"
+msgid ""
+msgstr ""
+
+#: 968.Barcode.FileRow.Label
+msgid "Row"
+msgstr "OptionButton1"
+
+#: 971.Barcode.FileColumn.HelpText
+msgctxt "971.Barcode.FileColumn.HelpText"
+msgid ""
+msgstr ""
+
+#: 972.Barcode.FileColumn.Label
+msgid "Column"
+msgstr "OptionButton1"
+
+#: 979.Barcode.Dot.HelpText
+msgctxt "979.Barcode.Dot.HelpText"
+msgid ""
+msgstr ""
+
+#: 980.Barcode.Dot.Label
+msgid "."
+msgstr "Label1"

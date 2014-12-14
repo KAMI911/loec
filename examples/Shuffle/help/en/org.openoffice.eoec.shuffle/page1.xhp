@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helpdocument version="1.0">
+<meta>
+<topic id="shuffle" indexer="include" status="PUBLISH">
+<title id="title">Shuffle</title>
+<filename>/org.openoffice.eoec.shuffle/page1.xhp</filename>
+</topic>
+</meta>
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm1">
+<bookmark_value>Shuffle</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/org.openoffice.eoec.shuffle:About" id="bm2" localize="false" />
+
+<paragraph role="heading" level="1">Shuffle
+</paragraph>
+<paragraph role="paragraph">
+
+Shuffle is an <item type="productname">%PRODUCTNAME</item> extension by EOEC.
+
+</paragraph>
+
+
+</body>
+</helpdocument>

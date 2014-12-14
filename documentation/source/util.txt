@@ -1,0 +1,197 @@
+
+.. _the-utility-library:
+
+The Utility Library
+===================
+
+EOEC speeds up development, but given how complicated the OpenOffice.org API is
+in some parts it is also very important to facilitate code reuse, and this is
+why we have started to collect the most often used pieces of code in a
+supplemental API package. This is the ``util`` module that you can access from
+your extensions.
+
+``util.draw``
+-------------
+
+.. module:: util.draw
+	:synopsis: Draw object related functionality
+	
+The functions in this module deal with UNO API related to Draw objects.
+	
+The unit of measurement used for coordinates in the UNO API is one thousandth
+of an inch. It is also used internally in OpenOffice.org and only integer coordinates
+are allowed.
+
+.. function:: rgb(r, g, b)
+	
+	Converts a color given in float representation to the format used in the UNO API.
+	For example ``rgb(1.0, 0.0, 0.0)`` is red.
+
+	:type r: float
+	:param r: red component in range 0.0 - 1.0
+	:type g: float
+	:param g: green component in range 0.0 - 1.0
+	:type b: float
+	:param b: blue component in range 0.0 - 1.0
+	:rtype: int
+	:returns: the integer representation of the color suitable for use with the UNO API
+
+.. function:: RGB(r, g, b)
+
+	Converts a color given in integer representation to the format used in the UNO API.
+	For example ``rgb(255, 0, 0)`` is red.
+
+	:type r: int
+	:param r: red component in range 0 - 255
+	:type g: int
+	:param g: green component in range 0 - 255
+	:type b: int
+	:param b: blue component in range 0 - 255
+	:rtype: int
+	:returns: the integer representation of the color suitable for use with the UNO API
+
+.. function:: setpos(shape, x, y, w=None, h=None)
+
+	Moves and optionally resizes a Draw object.
+	
+	:param shape: the shape to move
+	:type x, y: int
+	:param x, y: destination coordinates
+
+.. function:: createShape(model, page, shapetype, color=None)
+
+	Creates a new shape and adds it to the DrawPage.
+	
+	The shape is created by::
+	
+		model.createInstance( 'com.sun.star.drawing.%sShape'%shapetype )
+	
+	:type model: ``com.sun.star.lang.XMultiServiceFactory``
+	:param model: The document object that can be used to create an instance of the given shape type.
+	              Normally it is the object you got the DrawPage from.
+	:type page: ``com.sun.star.draw.DrawPage``
+	:param page: The page to insert the new shape into. Normally one of the DrawPages of ``model``.
+	:type shapetype: string
+	:param shapetype: the kind of shape to be created
+	:type color: int or ``None``
+	:param color: the fill color or ``None`` for a transparent shape
+
+.. function:: createPolygon(model, page, coordss, color=None, type='PolyPolygon')
+
+	Uses ``createShape`` to create a ``com.sun.star.drawing.PolyPolygonShape`` or ``com.sun.star.drawing.PolyLineShape``.
+	The "PolyPolygon" shape is made up of the combination of a number of polygons, each of which are a closed outline.
+	(The polygons are implicitly closed, there is no need to duplicate the first point.)
+	The "PolyLine" shape is a collection of line sequences.
+
+	:type model: ``com.sun.star.lang.XMultiServiceFactory``
+	:param model: The document object that can be used to create an instance of the given shape type.
+	              Normally it is the object you got the DrawPage from.
+	:type page: ``com.sun.star.draw.DrawPage``
+	:param page: The page to insert the new shape into. Normally one of the DrawPages of ``model``.
+	:type coordss: list of lists of pairs of integers
+	:param coordss: The list of polygons each described by a list of their points which in turn are
+	                described by their integer coordinates. For example ``[[(0, 0), (1, 0), (1, 1), (0, 1)]]``
+	                is a unit sized square.
+	:type color: int or ``None``
+	:param color: the fill color or ``None`` for a transparent shape
+	:type type: string
+	:param type: ``'PolyPolygon'`` (the default, for drawing closed polygons) or ``'PolyLine'`` (for drawing open line segments).
+
+.. function:: embed(doc, imagefilename)
+
+	Inserts the image into the document as an embedded image. As opposed to a linked image it will be saved into
+	the document instead of becoming an external dependency.
+
+	:type doc: ``com.sun.star.lang.XMultiServiceFactory``
+	:param doc: The document object to insert into, for example a ``com.sun.star.text.TextDocument``.
+	:type imagefilename: string
+	:param imagefilename: The name of the image file in system-specific format (not as a URL).
+
+``util.writer``
+---------------
+
+.. module:: util.writer
+	:synopsis: Writer related functionality
+
+The functions in this module deal with UNO API related to Writer documents.
+
+.. function:: getWord(view)
+
+	Gets the word under the text cursor.
+	Returns a cursor object for the word which you can then use to access and modify the word::
+	
+		import util.writer
+		cursor = util.writer.getWord(self.getcontroller())
+		if cursor.String == 'something':
+			# replace something with something else
+			cursor.String = 'something else'
+
+	:type view: ``com.sun.star.text.XTextViewCursorSupplier``
+	:param view: The current ``TextDocumentView`` typically as returned by :meth:`extensioncore.ComponentBase.getcontroller`.
+	:rtype: ``com.sun.star.text.XTextViewCursor``
+	:returns: A cursor object for the word.
+
+
+``util.web``
+------------
+
+.. module:: util.web
+	:synopsis: web related functionality
+
+Since the web contains such a large number of useful sources of information and services,
+an extension might want to make efficient use of it. The goal of this module is to help with this.
+
+.. function:: loadpage(url)
+
+	Retrieves the page with the given URL.
+
+	``urllib2`` is used and the ``User-agent`` HTTP header is set to::
+	
+		Mozilla/5.0 (OpenOffice.org extension "My Extension" created with EuroOffice Extension Creator)
+	
+	The extension name is injected by the ``create.py`` script. To use a different
+	``User-agent`` header, ``util/web.py`` will have to be modified.
+
+	:type url: string
+	:param url: URL of the page to retrieve
+	:rtype: string
+	:returns: contents of the web page
+
+.. function:: getpage(url)
+
+	Retrieves the page with the given URL.
+	
+	This function uses a global cache object.
+	If the given URL has already been retrieved by ``getpage()``, it will be served from a
+	persistent cache. If it has not yet been cached, it is retrieved with :func:`loadpage`
+	and added to the cache.
+	
+	:type url: string
+	:param url: URL of the page to retrieve
+	:rtype: string
+	:returns: contents of the web page
+
+.. function:: flatten(x)
+
+	Flatten a `Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ object.
+	Sometimes nothing but the bare text content is wanted
+	from part of a web page, and this function supplements the Beautiful Soup API to provide access to it.
+	
+	:param x: the Beautiful Soup object
+	:rtype: string
+	:returns: the flattened string
+
+.. data:: MAX_CACHE_SIZE
+
+	The maximal cache size. Once the cache reaches this size it is deleted and a new cache is started.
+
+	Defaults to 10MB.
+
+.. function:: setcachefile(filename)
+
+	The file name to use for the web cache. By default the file name ``'./cache'`` is used, but this
+	can depend highly on platform and OpenOffice.org build, so setting the cache file name is important.
+
+	If the file named does not exist a new file will be created. Take care, because if the file exists, but
+	is not actually a cache file it will be overwritten with a cache file.
+

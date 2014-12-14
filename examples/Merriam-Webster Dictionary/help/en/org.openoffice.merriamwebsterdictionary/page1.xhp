@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helpdocument version="1.0">
+<meta>
+<topic id="merriamwebsterdictionary" indexer="include" status="PUBLISH">
+<title id="title">Merriam-Webster Dictionary</title>
+<filename>/org.openoffice.merriamwebsterdictionary/page1.xhp</filename>
+</topic>
+</meta>
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm1">
+<bookmark_value>Merriam-Webster Dictionary</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/org.openoffice.merriamwebsterdictionary:About" id="bm2" localize="false" />
+
+<paragraph role="heading" level="1">Merriam-Webster Dictionary
+</paragraph>
+<paragraph role="paragraph">
+
+Merriam-Webster Dictionary is an <item type="productname">%PRODUCTNAME</item> extension by MultiRacio.
+
+</paragraph>
+
+
+</body>
+</helpdocument>

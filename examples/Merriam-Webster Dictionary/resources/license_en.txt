@@ -1,0 +1,23 @@
+﻿============= IMPORTANT NOTES =============
+
+Thank you for choosing Merriam-Webster Dictionary!
+
+This extension will become active after you restart the application. If you have the quickstarter running, it should also be closed during the restart.
+
+If you have any questions about Merriam-Webster Dictionary visit https://launchpad.net/eoec/
+
+This extension was created by MultiRacio with EuroOffice Extension Creator (by MultiRacio Ltd.). You should direct most of your feedback to MultiRacio, but if you think it has more to do with EuroOffice Extension Creator, visit https://launchpad.net/eoec/
+
+============= TERMS OF USE =============
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+The full text of the license can be read at http://www.gnu.org/licenses/gpl-3.0.txt

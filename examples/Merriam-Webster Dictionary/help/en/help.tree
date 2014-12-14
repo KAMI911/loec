@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view>
+  <help_section application="multiracio" id="multiracio" title="MultiRacio's Extensions">
+    <node id="merriamwebsterdictionary" title="Merriam-Webster Dictionary">
+      <topic id="multiracio/org.openoffice.merriamwebsterdictionary/page1.xhp">How to use Merriam-Webster Dictionary</topic>
+    </node>
+  </help_section>
+</tree_view>

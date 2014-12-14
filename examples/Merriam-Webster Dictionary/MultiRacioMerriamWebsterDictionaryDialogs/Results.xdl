@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Results" dlg:left="114" dlg:top="18" dlg:width="293" dlg:height="194" dlg:help-text="&amp;643.Results.HelpText" dlg:closeable="true" dlg:moveable="true" dlg:title="&amp;644.Results.Title" dlg:help-url="org.openoffice.merriamwebsterdictionary:About">
+ <dlg:bulletinboard>
+  <dlg:menulist dlg:id="ListBox1" dlg:tab-index="0" dlg:left="5" dlg:top="14" dlg:width="100" dlg:height="150" dlg:help-text="&amp;645.Results.ListBox1.HelpText"/>
+  <dlg:menulist dlg:id="ListBox2" dlg:tab-index="1" dlg:left="110" dlg:top="15" dlg:width="180" dlg:height="150" dlg:help-text="&amp;646.Results.ListBox2.HelpText"/>
+  <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="5" dlg:top="4" dlg:width="118" dlg:height="12" dlg:help-text="&amp;647.Results.Label1.HelpText" dlg:value="&amp;648.Results.Label1.Label"/>
+  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="110" dlg:top="5" dlg:width="134" dlg:height="12" dlg:help-text="&amp;649.Results.Label2.HelpText" dlg:value="&amp;650.Results.Label2.Label"/>
+  <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="5" dlg:top="169" dlg:width="280" dlg:height="22" dlg:help-text="&amp;651.Results.Label3.HelpText" dlg:value="&amp;652.Results.Label3.Label" dlg:multiline="true"/>
+ </dlg:bulletinboard>
+</dlg:window>

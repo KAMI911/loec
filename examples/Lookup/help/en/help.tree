@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view>
+  <help_section application="eoec" id="eoec" title="EOEC's Extensions">
+    <node id="lookup" title="Lookup">
+      <topic id="eoec/org.openoffice.eoec.lookup/page1.xhp">How to use Lookup</topic>
+    </node>
+  </help_section>
+</tree_view>
